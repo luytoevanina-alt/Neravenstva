@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренажёр: Иррациональные неравенства</title>
+    
+    <!-- Встроенный MathJax для полной автономности -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+
+    <style>
+        :root {
+            --text-color: #2c3e50;
+            --bg-main: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            color: #1a252f;
+        }
+
+        /* Общие стили для блоков */
+        .section {
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+        }
+
+        .theory {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid rgba(0,0,0,0.2);
+        }
+        
+        .theory-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Цветовые схемы для разделов */
+        .sec-1 { background-color: #ffeaea; }
+        .sec-1 .theory { border-left-color: #e74c3c; }
+
+        .sec-2 { background-color: #eafaf1; }
+        .sec-2 .theory { border-left-color: #2ecc71; }
+
+        .sec-3 { background-color: #eaf2f8; }
+        .sec-3 .theory { border-left-color: #3498db; }
+
+        .sec-4 { background-color: #fef9e7; }
+        .sec-4 .theory { border-left-color: #f1c40f; }
+
+        .sec-5 { background-color: #f4ecf7; }
+        .sec-5 .theory { border-left-color: #9b59b6; }
+
+        .sec-6 { background-color: #fdf2e9; }
+        .sec-6 .theory { border-left-color: #e67e22; }
+
+        .sec-7 { background-color: #f0f3f4; }
+        .sec-7 .theory { border-left-color: #7f8c8d; }
+
+        .sec-8 { background-color: #e8f8f5; }
+        .sec-8 .theory { border-left-color: #1abc9c; }
+
+        /* Карточка задания */
+        .task-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .task-number {
+            font-weight: bold;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .task-formula {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Поле для решения */
+        .solution-field {
+            width: 100%;
+            height: 150px;
+            box-sizing: border-box;
+            background-color: #fdfdfd;
+            background-image: 
+                linear-gradient(to right, #e0e0e0 1px, transparent 1px),
+                linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px;
+            border: 1px solid #dcdcdc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            pointer-events: none;
+            resize: none;
+        }
+
+        /* Кнопка и ответ */
+        .btn-check {
+            background-color: #34495e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-check:hover {
+            background-color: #2c3e50;
+        }
+
+        .answer-box {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-left: 4px solid #27ae60;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .answer-box strong {
+            color: #27ae60;
+        }
+
+        /* Небольшая ссылка в подвале */
+        .footer-link {
+            text-align: center;
+            margin-top: 40px;
+            padding: 12px;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+        .footer-link a {
+            color: #4a76a8;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Тренажёр: Иррациональные неравенства</h1>
+
+    <!-- БЛОК 1 -->
+    <div class="section sec-1">
+        <h2>Тип 1. Корень меньше отрицательного числа</h2>
+        <div class="theory">
+            <div class="theory-title">Теоретический шаблон: \(\sqrt{f(x)} < a\), где \(a < 0\)</div>
+            <p>Корень всегда неотрицателен (\(\ge 0\)). Он не может быть меньше отрицательного числа.</p>
+            <p><strong>Ответ:</strong> решений нет (\(x \in \emptyset\)).</p>
+        </div>
+        
+        <div class="task-card">
+            <div class="task-number">Задание 1</div>
+            <div class="task-formula">\(\sqrt{3x - 2} < -2\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(\emptyset\)</strong></div>
+        </div>
+    </div>
+
+    <!-- БЛОК 2 -->
+    <div class="section sec-2">
+        <h2>Тип 2. Корень меньше положительного числа</h2>
+        <div class="theory">
+            <div class="theory-title">Теоретический шаблон: \(\sqrt{f(x)} < a\) (или \(\le a\)), где \(a > 0\)</div>
+            <p>Обе части неотрицательны, возводим в квадрат. Обязательно учитываем ОДЗ:</p>
+            <p>\[
+ \begin{cases} f(x) \ge 0 \\ f(x) < a^2 \end{cases} 
+\]</p>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 2</div>
+            <div class="task-formula">\(\sqrt{x - 2} < 5\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in [2; 27)\)</strong></div>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 3</div>
+            <div class="task-formula">\(\sqrt{3 - 2x} \le 7\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in [-23; 1,5]\)</strong></div>
+        </div>
+    </div>
+
+    <!-- БЛОК 3 -->
+    <div class="section sec-3">
+        <h2>Тип 3. Корень больше (или \(\ge\)) числа</h2>
+        <div class="theory">
+            <div class="theory-title">Теоретический шаблон: \(\sqrt{f(x)} > a\) (или \(\ge a\))</div>
+            <p>Смотрим на знак \(a\):</p>
+            <ul>
+                <li><strong>Если \(a < 0\):</strong> корень всегда больше отрицательного числа, если существует. Решение — ОДЗ: \(f(x) \ge 0\).</li>
+                <li><strong>Если \(a \ge 0\):</strong> возводим в квадрат, ОДЗ выполняется автоматически: \(f(x) > a^2\) (или \(\ge a^2\)).</li>
+            </ul>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 4</div>
+            <div class="task-formula">\(\sqrt{x + 2} \ge 3\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in [7; +\infty)\)</strong></div>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 5</div>
+            <div class="task-formula">\(\sqrt{7 - 3x} > 5\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in (-\infty; -6)\)</strong></div>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 6</div>
+            <div class="task-formula">\(\sqrt{2x + 1} > -3\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in [-0,5; +\infty)\)</strong></div>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 7</div>
+            <div class="task-formula">\(\sqrt{7 - \frac{x}{2}} \ge -1\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in (-\infty; 14]\)</strong></div>
+        </div>
+    </div>
+
+    <!-- БЛОК 4 -->
+    <div class="section sec-4">
+        <h2>Тип 4. Корень меньше выражения с \(x\)</h2>
+        <div class="theory">
+            <div class="theory-title">Теоретический шаблон: \(\sqrt{f(x)} < g(x)\) (или \(\le g(x)\))</div>
+            <p>Корень \(\ge 0\). Чтобы он был меньше \(g(x)\), само \(g(x)\) должно быть строго больше нуля:</p>
+            <p>\[
+ \begin{cases} f(x) \ge 0 \\ g(x) > 0 \\ f(x) < g(x)^2 \end{cases} 
+\]</p>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 8</div>
+            <div class="task-formula">\(\sqrt{x + 8} < x + 2\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in (1; +\infty)\)</strong></div>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 9</div>
+            <div class="task-formula">\(\sqrt{x - 2} \le x - 2\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in \{2\} \cup [3; +\infty)\)</strong></div>
+        </div>
+    </div>
+
+    <!-- БЛОК 5 -->
+    <div class="section sec-5">
+        <h2>Тип 5. Корень больше выражения с \(x\)</h2>
+        <div class="theory">
+            <div class="theory-title">Теоретический шаблон: \(\sqrt{f(x)} > g(x)\) (или \(\ge g(x)\))</div>
+            <p>Два принципиально разных случая (совокупность):</p>
+            <p>\[
+ \left[ \begin{array}{l} \begin{cases} g(x) < 0 \\ f(x) \ge 0 \end{cases} \\ \begin{cases} g(x) \ge 0 \\ f(x) > g(x)^2 \end{cases} \end{array} \right. 
+\]</p>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 10</div>
+            <div class="task-formula">\(\sqrt{x + 8} > x + 2\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in [-8; 1)\)</strong></div>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 11</div>
+            <div class="task-formula">\(\sqrt{x - 2} > x - 2\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in (2; 3)\)</strong></div>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 12</div>
+            <div class="task-formula">\(\sqrt{x^2 + 2x} > -3 - x^2\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in (-\infty; -2] \cup [0; +\infty)\)</strong></div>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 13</div>
+            <div class="task-formula">\(\sqrt{x^2 + x - 12} > 6 - x\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in \left(\frac{48}{13}; +\infty\right)\)</strong></div>
+        </div>
+    </div>
+
+    <!-- БЛОК 6 -->
+    <div class="section sec-6">
+        <h2>Тип 6. Сравнение двух корней</h2>
+        <div class="theory">
+            <div class="theory-title">Теоретический шаблон: \(\sqrt{f(x)} < \sqrt{g(x)}\) (или \(\le\))</div>
+            <p>Оба корня \(\ge 0\), возводим в квадрат. Нужны ОДЗ для обоих:</p>
+            <p>\[
+ \begin{cases} f(x) \ge 0 \\ g(x) \ge 0 \\ f(x) < g(x) \end{cases} 
+\]</p>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 14</div>
+            <div class="task-formula">\(\sqrt{x + 2} > \sqrt{4 - x}\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in (1; 4]\)</strong></div>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 15</div>
+            <div class="task-formula">\(\sqrt{2x - 8} \le \sqrt{6x + 13}\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in [4; +\infty)\)</strong></div>
+        </div>
+    </div>
+
+    <!-- БЛОК 7 -->
+    <div class="section sec-7">
+        <h2>Тип 7. Корень меньше заведомо неположительного выражения</h2>
+        <div class="theory">
+            <div class="theory-title">Теоретический шаблон: \(\sqrt{f(x)} \le g(x)\), где \(g(x) \le 0\)</div>
+            <p>Корень \(\ge 0\). Чтобы он был меньше или равен выражению \(\le 0\), обе части должны быть равны нулю:</p>
+            <p>\[
+ \begin{cases} f(x) \ge 0 \\ g(x) = 0 \\ f(x) = 0 \end{cases} 
+\]</p>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 16</div>
+            <div class="task-formula">\(\sqrt{x^2 - 3x + 2} \le -1 - |x|\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(\emptyset\)</strong></div>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 17</div>
+            <div class="task-formula">\(\sqrt{x^2 - 4x + 13} \le -x^2 + 4x - 1\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in \{2\}\)</strong></div>
+        </div>
+    </div>
+
+    <!-- БЛОК 8 -->
+    <div class="section sec-8">
+        <h2>Тип 8. Многоэтажный (вложенный) корень</h2>
+        <div class="theory">
+            <div class="theory-title">Теоретический шаблон: \(\sqrt{f(x) + \sqrt{h(x)}} \le a\), где \(a > 0\)</div>
+            <p>Действуем снаружи внутрь. Возводим в квадрат:</p>
+            <p>\(f(x) + \sqrt{h(x)} \le a^2 \implies \sqrt{h(x)} \le a^2 - f(x)\)</p>
+            <p>Далее решаем как Тип 4.</p>
+        </div>
+
+        <div class="task-card">
+            <div class="task-number">Задание 18</div>
+            <div class="task-formula">\(\sqrt{2 + \sqrt{x^2 + 2x + 5}} \le 2\)</div>
+            <textarea class="solution-field" readonly></textarea>
+            <button class="btn-check" onclick="toggleAnswer(this)">Показать ответ</button>
+            <div class="answer-box">Ответ: <strong>\(x \in \{-1\}\)</strong></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer-link">
+    Нашли ошибку или хотите пообщаться? <a href="https://vk.ru/country_tutor" target="_blank" rel="noopener noreferrer">Наша группа ВКонтакте</a>
+</div>
+
+<script>
+    // Функция для скрытия/показа ответа
+    function toggleAnswer(button) {
+        const answerBox = button.nextElementSibling;
+        if (answerBox.style.display === "block") {
+            answerBox.style.display = "none";
+            button.textContent = "Показать ответ";
+        } else {
+            answerBox.style.display = "block";
+            button.textContent = "Скрыть ответ";
+        }
+    }
+</script>
+
+</body>
+</html>
